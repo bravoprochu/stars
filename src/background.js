@@ -1,4 +1,5 @@
 import { createRng } from "./rng.js";
+import { glow } from "./glow.js";
 
 /** Static + twinkling backdrop: sky gradient, star field, milky way and layered mountains. */
 export class Background {
@@ -131,13 +132,13 @@ export class Background {
     ctx.fillRect(0, 0, width, horizonY + 2);
 
     // Ambient glow near horizon
-    const glow = ctx.createRadialGradient(
+    const ambient = ctx.createRadialGradient(
       width * 0.5, horizonY, 0,
       width * 0.5, horizonY, width * 0.6
     );
-    glow.addColorStop(0, this.config.world.ambientGlowColor);
-    glow.addColorStop(1, "rgba(0,0,0,0)");
-    ctx.fillStyle = glow;
+    ambient.addColorStop(0, this.config.world.ambientGlowColor);
+    ambient.addColorStop(1, "rgba(0,0,0,0)");
+    ctx.fillStyle = ambient;
     ctx.fillRect(0, 0, width, horizonY + 2);
 
     // Milky way
@@ -155,16 +156,16 @@ export class Background {
     for (const star of this.stars) {
       const tw = Math.sin(this.time * star.speed + star.phase) * 0.5 + 0.5;
       const alpha = Math.min(1, s.baseAlpha + tw * s.twinkleAlpha);
+      if (star.bright) {
+        const g = star.radius * 6;
+        ctx.globalAlpha = alpha * 0.6;
+        ctx.drawImage(glow.get(star.color), star.x - g / 2, star.y - g / 2, g, g);
+      }
       ctx.globalAlpha = alpha;
       ctx.fillStyle = star.color;
-      if (star.bright) {
-        ctx.shadowBlur = s.brightStarGlow;
-        ctx.shadowColor = star.color;
-      }
       ctx.beginPath();
       ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
       ctx.fill();
-      ctx.shadowBlur = 0;
     }
     ctx.globalAlpha = 1;
   }

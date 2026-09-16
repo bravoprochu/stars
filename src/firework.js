@@ -1,3 +1,5 @@
+import { glow } from "./glow.js";
+
 /** A firework burst spawned where a shooting star was hit. */
 export class Firework {
   constructor(config, x, y, rng) {
@@ -87,14 +89,11 @@ export class Firework {
       ctx.lineTo(p.x - p.vx * 0.02, p.y - p.vy * 0.02);
       ctx.stroke();
 
-      ctx.shadowBlur = 10;
-      ctx.shadowColor = p.color;
-      ctx.fillStyle = p.color;
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, p.radius * (0.4 + 0.6 * alpha), 0, Math.PI * 2);
-      ctx.fill();
+      // Cheap glow via a cached sprite instead of per-particle shadowBlur.
+      const sprite = glow.get(p.color);
+      const s = p.radius * 7 * (0.55 + 0.45 * alpha);
+      ctx.drawImage(sprite, p.x - s / 2, p.y - s / 2, s, s);
     }
-    ctx.shadowBlur = 0;
     ctx.globalAlpha = 1;
     ctx.globalCompositeOperation = "source-over";
   }
