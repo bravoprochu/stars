@@ -122,8 +122,9 @@ export class Background {
     this.time += dt;
   }
 
-  draw(ctx) {
-    const { width, height, horizonY } = this;
+  /** Sky, ambient glow, milky way and twinkling stars (drawn behind the shooting star). */
+  drawSky(ctx) {
+    const { width, horizonY } = this;
 
     // Sky
     ctx.fillStyle = this._skyGradient;
@@ -166,13 +167,16 @@ export class Background {
       ctx.shadowBlur = 0;
     }
     ctx.globalAlpha = 1;
+  }
 
-    // Mountains (front to back drawn back-first)
+  /** Mountain silhouettes (drawn in front so the shooting star sinks behind them). */
+  drawMountains(ctx) {
     for (const m of this.mountainLayers) {
       this._drawMountainLayer(ctx, m);
     }
+  }
 
-    // Vignette
+  drawVignette(ctx) {
     this._drawVignette(ctx);
   }
 

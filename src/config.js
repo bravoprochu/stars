@@ -43,12 +43,12 @@ export const config = {
   mountains: {
     hillsCount: 9,
     layers: [
-      { heightRatio: 0.34, roughness: 0.64, color: "#111a40", detail: 0.9 },
-      { heightRatio: 0.26, roughness: 0.6, color: "#0a1130", detail: 1.0 },
-      { heightRatio: 0.19, roughness: 0.56, color: "#04060f", detail: 1.15 },
+      { heightRatio: 0.2, roughness: 0.64, color: "#111a40", detail: 0.9 },
+      { heightRatio: 0.15, roughness: 0.6, color: "#0a1130", detail: 1.0 },
+      { heightRatio: 0.1, roughness: 0.56, color: "#04060f", detail: 1.15 },
     ],
-    layerDropRatio: 0.05,
-    snowLine: 0.7,
+    layerDropRatio: 0.045,
+    snowLine: 0.72,
     snowColor: "rgba(216, 226, 255, 0.62)",
     ridgeLightColor: "rgba(150, 175, 255, 0.10)",
   },
@@ -57,8 +57,8 @@ export const config = {
     firstStarMaxRandomShowMs: 2600,
     minDelayMs: 2200,
     maxDelayMs: 6000,
-    minSpeed: 380,
-    maxSpeed: 620,
+    minSpeed: 190,
+    maxSpeed: 340,
     trailLength: 28,
     coreRadius: 2.6,
     glowRadius: 22,
@@ -99,7 +99,7 @@ export const config = {
 
   celebration: {
     enabled: true,
-    text: "Bravo Sandra!",
+    text: "Bravo",
     color: "#fff6d8",
     glowColor: "rgba(255, 214, 140, 0.95)",
     fontFamily: "'Segoe UI', system-ui, -apple-system, sans-serif",

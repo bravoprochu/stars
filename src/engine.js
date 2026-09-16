@@ -134,10 +134,13 @@ export class Engine {
   _render() {
     const ctx = this.ctx;
     ctx.clearRect(0, 0, this.width, this.height);
-    this.background.draw(ctx);
+    this.background.drawSky(ctx);
+    // Shooting star sits behind the mountains so it sinks below the horizon.
     if (this.star && this.star.alive) this.star.draw(ctx);
+    this.background.drawMountains(ctx);
     for (const fw of this.fireworks) fw.draw(ctx, this.time);
     this.celebration.draw(ctx, this.time);
+    this.background.drawVignette(ctx);
 
     // Cursor hint over an active star
     if (
