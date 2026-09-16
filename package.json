@@ -1,0 +1,14 @@
+{
+  "name": "starry-sky-shooting-stars",
+  "version": "1.0.0",
+  "description": "Interactive starry night with mountain horizon and clickable shooting stars that burst into fireworks.",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "serve -l 3000 .",
+    "dev": "serve -l 3000 ."
+  },
+  "dependencies": {
+    "serve": "^14.2.4"
+  }
+}
